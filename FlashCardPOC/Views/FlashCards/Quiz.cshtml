@@ -1,0 +1,26 @@
+﻿@model FlashCardPOC.Models.FlashCard
+
+@{
+    ViewBag.Title = "Quiz";
+}
+
+<h2>Question</h2>
+
+<div>
+    <h4>FlashCard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.question)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Answer", "BackOfCard", new { id = Model.ID})
+    @Html.ActionLink("Back to List", "Index")
+</p>

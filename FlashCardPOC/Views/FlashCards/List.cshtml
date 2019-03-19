@@ -1,0 +1,76 @@
+﻿@model IEnumerable<FlashCardPOC.Models.FlashCard>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.style)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.question)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.answer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numAttempts)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numRight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numWrong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.percentageRight)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.style)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.question)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.answer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numAttempts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numWrong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.percentageRight)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

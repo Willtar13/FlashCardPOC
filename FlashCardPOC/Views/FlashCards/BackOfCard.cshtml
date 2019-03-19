@@ -1,0 +1,66 @@
+﻿@model FlashCardPOC.Models.FlashCard
+
+@{
+    ViewBag.Title = "BackOfCard";
+}
+
+<h2>Answer</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.answer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.answer)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.numAttempts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numAttempts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numRight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numRight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numWrong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numWrong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.percentageRight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.percentageRight)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Correct", "Correct", new { id = Model.ID}) |
+    @Html.ActionLink("Incorrect", "Incorrect", new { id = Model.ID})
+</p>
