@@ -47,6 +47,29 @@ namespace FlashCardPOC.Controllers
             }
         }
 
+        public ActionResult CreateDeck()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateDeck(string category)
+        {
+            try
+            {
+                ViewData["category"] = category;
+
+                repo.GetSingleCategoryDeck(ViewData);
+
+                return View("Index");
+            }
+
+            catch
+            {
+                return View();
+            }
+        }
+
         public ActionResult Quiz(int? id = 1)
         {
 
@@ -94,10 +117,7 @@ namespace FlashCardPOC.Controllers
             return View();
         }
 
-        public ActionResult CreateDeck()
-        {
-            return View();
-        }
+
 
         // GET: FlashCards/Delete/5
         //public ActionResult Delete(int? id)

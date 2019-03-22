@@ -154,11 +154,11 @@ namespace FlashCardPOC.Repo
             return GetQuestion(i);
         }
 
-        public List<FlashCard> GetSingleCategoryDeck(string category)
+        public List<FlashCard> GetSingleCategoryDeck(ViewDataDictionary dict)
         {
             connection.Open();
 
-            string sqlCommand = "Select * FROM " + category;
+            string sqlCommand = "Select * FROM " + dict["category"].ToString();
 
             List<FlashCard> flashCardList = new List<FlashCard>();
 
@@ -175,10 +175,12 @@ namespace FlashCardPOC.Repo
                         flashCard.style = reader.GetString(2);
                         flashCard.question = reader.GetString(3);
                         flashCard.answer = reader.GetString(4);
-                        flashCard.numAttempts = reader.GetInt32(5);
-                        flashCard.numRight = reader.GetInt32(6);
-                        flashCard.numWrong = reader.GetInt32(7);
-                        flashCard.percentageRight = reader.GetDecimal(8);
+                        flashCard.subCategory1 = reader.GetString(5);
+                        flashCard.subCategory2 = reader.GetString(6);
+                        flashCard.subCategory3 = reader.GetString(7);
+                        flashCard.numAttempts = reader.GetInt32(8);
+                        flashCard.numRight = reader.GetInt32(9);
+                        flashCard.percentageRight = reader.GetDecimal(10);
                         flashCardList.Add(flashCard);
                     }
                 }

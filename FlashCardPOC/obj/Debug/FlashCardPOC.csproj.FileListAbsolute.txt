@@ -92,3 +92,4 @@ C:\Users\Owner\source\repos\FlashCardPOC\FlashCardPOC\bin\EntityFramework.dll
 C:\Users\Owner\source\repos\FlashCardPOC\FlashCardPOC\bin\EntityFramework.SqlServer.dll
 C:\Users\Owner\source\repos\FlashCardPOC\FlashCardPOC\bin\EntityFramework.xml
 C:\Users\Owner\source\repos\FlashCardPOC\FlashCardPOC\bin\EntityFramework.SqlServer.xml
+C:\Users\Owner\source\repos\FlashCardPOC\FlashCardPOC\obj\Debug\FlashCardPOC.csprojAssemblyReference.cache
