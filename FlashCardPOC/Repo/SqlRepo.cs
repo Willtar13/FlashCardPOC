@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace FlashCardPOC.Repo
 {
-    public class SqlRepo
+    public class SqlRepo : ISqlRepo
     {
 
         private SqlConnection connection;
@@ -152,6 +152,46 @@ namespace FlashCardPOC.Repo
             connection.Close();
 
             return GetQuestion(i);
+        }
+
+        public List<FlashCard> GetSingleCategoryDeck(string category)
+        {
+            connection.Open();
+
+            string sqlCommand = "Select * FROM " + category;
+
+            List<FlashCard> flashCardList = new List<FlashCard>();
+
+            try
+            {
+                using (SqlCommand command = new SqlCommand(sqlCommand, connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        FlashCard flashCard = new FlashCard();
+                        flashCard.ID = reader.GetInt32(0);
+                        flashCard.category = reader.GetString(1);
+                        flashCard.style = reader.GetString(2);
+                        flashCard.question = reader.GetString(3);
+                        flashCard.answer = reader.GetString(4);
+                        flashCard.numAttempts = reader.GetInt32(5);
+                        flashCard.numRight = reader.GetInt32(6);
+                        flashCard.numWrong = reader.GetInt32(7);
+                        flashCard.percentageRight = reader.GetDecimal(8);
+                        flashCardList.Add(flashCard);
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return null;
+            }
+            connection.Close();
+
+            return flashCardList;
         }
     }
 }

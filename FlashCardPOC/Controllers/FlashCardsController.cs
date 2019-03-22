@@ -94,6 +94,11 @@ namespace FlashCardPOC.Controllers
             return View();
         }
 
+        public ActionResult CreateDeck()
+        {
+            return View();
+        }
+
         // GET: FlashCards/Delete/5
         //public ActionResult Delete(int? id)
         //{
