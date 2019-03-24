@@ -27,7 +27,7 @@ namespace FlashCardPOC.Repo
             }
         }
 
-        public FlashCard GetQuestion(int? j)
+        public FlashCard GetQuestion(int? j, string category)
         {
             int i = j.GetValueOrDefault();
 
@@ -35,7 +35,7 @@ namespace FlashCardPOC.Repo
 
             connection.Open();
 
-            string sqlCommand = "Select * FROM FlashCardTest WHERE ID = " + i;
+            string sqlCommand = "Select * FROM " + category + " WHERE ID = " + i;
 
             try
             {
@@ -49,10 +49,12 @@ namespace FlashCardPOC.Repo
                         flashCard.style = reader.GetString(2);
                         flashCard.question = reader.GetString(3);
                         flashCard.answer = reader.GetString(4);
-                        flashCard.numAttempts = reader.GetInt32(5);
-                        flashCard.numRight = reader.GetInt32(6);
-                        flashCard.numWrong = reader.GetInt32(7);
-                        flashCard.percentageRight = reader.GetDecimal(8);
+                        flashCard.subCategory1 = reader.GetString(5);
+                        flashCard.subCategory2 = reader.GetString(6);
+                        flashCard.subCategory3 = reader.GetString(7);
+                        flashCard.numAttempts = reader.GetInt32(8);
+                        flashCard.numRight = reader.GetInt32(9);
+                        flashCard.percentageRight = reader.GetDecimal(10);
                     }
                 }
             }
@@ -98,14 +100,14 @@ namespace FlashCardPOC.Repo
             return true;
         }
 
-        public FlashCard LogCorrectResult(int? j)
+        public FlashCard LogCorrectResult(int? j, string category)
         {
             int i = j.GetValueOrDefault();
 
             connection.Open();
 
-            string sqlCommandCorrect = "UPDATE FlashCardTest SET numRight = numRight + 1 WHERE ID = " + i;
-            string sqlCommandAttempts = "UPDATE FlashCardTest SET numAttempts = numAttempts +1 WHERE ID = " + i;
+            string sqlCommandCorrect = "UPDATE " + category + " SET numRight = numRight + 1 WHERE ID = " + i;
+            string sqlCommandAttempts = "UPDATE " + category + " SET numAttempts = numAttempts +1 WHERE ID = " + i;
 
             try
             {
@@ -123,17 +125,17 @@ namespace FlashCardPOC.Repo
 
             connection.Close();
 
-            return GetQuestion(i);
+            return GetQuestion(i, category);
         }
 
-        public FlashCard LogInCorrectResult(int? j)
+        public FlashCard LogInCorrectResult(int? j, string category)
         {
             int i = j.GetValueOrDefault();
 
             connection.Open();
 
-            string sqlCommandinCorrect = "UPDATE FlashCardTest SET numWrong = numRight - 1 WHERE ID = " + i;
-            string sqlCommandAttempts = "UPDATE FlashCardTest SET numAttempts = numAttempts + 1 WHERE ID = " + i;
+            string sqlCommandinCorrect = "UPDATE " + category + " SET numRight = numRight - 1 WHERE ID = " + i;
+            string sqlCommandAttempts = "UPDATE " + category + " SET numAttempts = numAttempts + 1 WHERE ID = " + i;
 
             try
             {
@@ -151,7 +153,7 @@ namespace FlashCardPOC.Repo
 
             connection.Close();
 
-            return GetQuestion(i);
+            return GetQuestion(i, category);
         }
 
         public List<FlashCard> GetSingleCategoryDeck(ViewDataDictionary dict)

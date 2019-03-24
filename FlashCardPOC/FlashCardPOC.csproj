@@ -222,6 +222,7 @@
     <Content Include="Views\FlashCards\Correct.cshtml" />
     <Content Include="Views\FlashCards\InCorrect.cshtml" />
     <Content Include="Views\FlashCards\CreateDeck.cshtml" />
+    <Content Include="Views\FlashCards\ChooseCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
