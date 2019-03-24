@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 
-namespace FlashCardPOC.Repo
+namespace FlashCardPOC.Helpers
 {
-    interface ISqlRepo
+    public interface ICreateDeck
     {
-        List<FlashCard> GetSingleCategoryDeck(ViewDataDictionary category);
+        List<FlashCard> CreateDeck(List<String> Categories);
     }
 }

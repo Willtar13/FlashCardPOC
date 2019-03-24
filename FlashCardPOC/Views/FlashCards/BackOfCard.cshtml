@@ -61,6 +61,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Correct", "Correct", new { id = Model.ID}) |
-    @Html.ActionLink("Incorrect", "Incorrect", new { id = Model.ID})
+    @Html.ActionLink("Correct", "Correct", new { category = Model.category, id = Model.ID}) |
+    @Html.ActionLink("Incorrect", "Incorrect", new { category = Model.category, id = Model.ID})
 </p>

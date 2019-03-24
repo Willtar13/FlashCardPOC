@@ -47,21 +47,67 @@ namespace FlashCardPOC.Controllers
             }
         }
 
-        public ActionResult Quiz(int? id = 1)
+        public ActionResult CreateDeck()
         {
+            return View();
+        }
 
-            FlashCard flashCard = repo.GetQuestion(id);
+        [HttpPost]
+        public ActionResult CreateDeck(string category)
+        {
+            try
+            {
+                ViewData["category"] = category;
+
+                repo.GetSingleCategoryDeck(ViewData);
+
+                return View("Index");
+            }
+
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult ChooseCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChooseCategory(string category, int? id = 0)
+        {
+            try
+            {
+                ViewData["category"] = category;
+                FlashCard flashCard = repo.GetQuestion(id, category);
+                
+                return View("Quiz", flashCard);
+            }
+
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Quiz(string category, int? id = 0)
+        {
+            FlashCard flashCard = repo.GetQuestion(id, category);
 
             if (flashCard == null)
             {
                 return HttpNotFound();
             }
             return View(flashCard);
+
+            return View();
         }
                                  
-        public ActionResult BackOfCard(int? id)
+        public ActionResult BackOfCard(int? id, string category)
         {
-            FlashCard flashCard = repo.GetQuestion(id);
+            FlashCard flashCard = repo.GetQuestion(id, category);
             if (flashCard == null)
             {
                 return HttpNotFound();
@@ -70,20 +116,20 @@ namespace FlashCardPOC.Controllers
             return View(flashCard);
         }
 
-        public ActionResult Correct(int? id)
+        public ActionResult Correct(string category, int? id)
         {
-            FlashCard temp = repo.LogCorrectResult(id);
+            FlashCard temp = repo.LogCorrectResult(id, category);
 
-            temp.percentageRight = (decimal)temp.numRight / (decimal)temp.numAttempts;
+            //temp.percentageRight = (decimal)temp.numRight / (decimal)temp.numAttempts;
 
             return View(temp);
         }
 
-        public ActionResult InCorrect(int? id)
+        public ActionResult InCorrect(int? id, string category)
         {
-            FlashCard temp = repo.LogInCorrectResult(id);
+            FlashCard temp = repo.LogInCorrectResult(id, category);
 
-            temp.percentageRight = (decimal)temp.numRight / (decimal)temp.numAttempts;
+            //temp.percentageRight = (decimal)temp.numRight / (decimal)temp.numAttempts;
 
             return View(temp);
         }
@@ -93,6 +139,8 @@ namespace FlashCardPOC.Controllers
         {
             return View();
         }
+
+
 
         // GET: FlashCards/Delete/5
         //public ActionResult Delete(int? id)
